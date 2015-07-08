@@ -76,11 +76,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
 
       <neon-animated-pages id="pages" class="flex" selected="[[selected]]" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]">
-        <neon-animatable>1</neon-animatable>
-        <neon-animatable>2</neon-animatable>
-        <neon-animatable>3</neon-animatable>
-        <neon-animatable>4</neon-animatable>
-        <neon-animatable>5</neon-animatable>
+
+        <template is="dom-repeat" items="[[pages]]"> 
+          <neon-animatable>[[item.value]]</neon-animatable>
+        </template>
+
       </neon-animated-pages>
 
     </template>
@@ -90,17 +90,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var scope = document.querySelector('template[is="dom-bind"]');
       scope.selected = 0;
 
+      scope.pages = [
+        {
+          value: 1
+        },
+        {
+          value: 2
+        },
+        {
+          value: 3
+        },
+        {
+          value: 4
+        },
+        {
+          value: 5
+        }
+      ];
+
       scope._onPrevClick = function() {
         this.entryAnimation = 'slide-from-left-animation';
         this.exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? 4 : (this.selected - 1);
-      }
+      };
 
       scope._onNextClick = function() {
         this.entryAnimation = 'slide-from-right-animation';
         this.exitAnimation = 'slide-left-animation';
         this.selected = this.selected === 4 ? 0 : (this.selected + 1);
-      }
+      };
 
     </script>
 
